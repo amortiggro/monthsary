@@ -313,12 +313,12 @@ body{
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   body {
-    padding: 5px;
+    padding: 10px;
     overflow-x: hidden;
   }
 
   .container {
-    padding: 10px 5px;
+    padding: 20px 10px;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -326,88 +326,51 @@ body{
   }
 
   .envelope-wrapper {
-    transform: scale(0.8);
-    transform-origin: center;
-    max-width: 95vw;
-    max-height: 95vh;
-  }
-
-  .envelope {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .letter {
+    width: 360px;
+    height: 276px;
+    transform: none;
     max-width: 90vw;
-    max-height: 75vh;
-    overflow-y: auto;
+    max-height: 70vh;
+  }
+
+  .envelope-wrapper::before {
+    width: 360px;
+    height: 276px;
+  }
+
+  .envelope-wrapper > .envelope {
+    width: 360px;
+    height: 276px;
+  }
+
+  .envelope-wrapper > .envelope::before {
+    border-top: 156px solid var(--envelope-tab);
+    border-right: 180px solid transparent;
+    border-left: 180px solid transparent;
+  }
+
+  .envelope-wrapper > .envelope::after {
+    border-top: 156px solid transparent;
+    border-right: 180px solid var(--envelope-cover);
+    border-bottom: 120px solid var(--envelope-cover);
+    border-left: 180px solid var(--envelope-cover);
+  }
+
+  .envelope > .letter {
+    width: 54%;
+    height: 80%;
     padding: 15px 8px;
   }
 
-  .text {
-    font-size: 13px !important;
-    line-height: 1.5;
-    padding: 10px;
-  }
-
-  .text strong {
-    font-size: 15px !important;
-  }
-
-  .text p {
-    margin: 6px 0;
-  }
-
-  /* Adjust floating pictures for mobile */
-  .floating-picture {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .floating-picture.small {
-    width: 45px !important;
-    height: 45px !important;
-  }
-
-  .floating-picture.large {
-    width: 75px !important;
-    height: 75px !important;
-  }
-
-  /* Adjust floating hearts for mobile */
-  .floating-heart {
-    width: 20px;
-    height: 20px;
-  }
-
-  .floating-heart::before,
-  .floating-heart::after {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 5px;
-  }
-
-  .envelope-wrapper {
-    transform: scale(0.65);
-    max-width: 98vw;
-    max-height: 98vh;
-  }
-
-  .letter {
-    max-width: 95vw;
-    max-height: 80vh;
-    padding: 12px 6px;
+  .flap > .envelope > .letter {
+    bottom: 120px;
+    transform: scale(1.3);
   }
 
   .text {
     font-size: 11px !important;
-    padding: 8px;
     line-height: 1.4;
+    padding: 8px;
   }
 
   .text strong {
@@ -418,63 +381,104 @@ body{
     margin: 4px 0;
   }
 
-  /* Smaller pictures for very small screens */
+  /* Adjust floating pictures for mobile */
   .floating-picture {
     width: 50px !important;
     height: 50px !important;
   }
 
   .floating-picture.small {
-    width: 35px !important;
-    height: 35px !important;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .floating-picture.large {
-    width: 65px !important;
-    height: 65px !important;
+    width: 60px !important;
+    height: 60px !important;
   }
 
-  /* Smaller hearts for very small screens */
+  /* Adjust floating hearts for mobile */
   .floating-heart {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 
   .floating-heart::before,
   .floating-heart::after {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .floating-heart:before {
+    top: -9px;
+  }
+
+  .floating-heart:after {
+    right: 9px;
   }
 }
 
-/* Extra small mobile screens */
-@media screen and (max-width: 360px) {
-  .envelope-wrapper {
-    transform: scale(0.55);
-    max-width: 100vw;
-    max-height: 100vh;
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 15px 5px;
   }
 
-  .letter {
-    max-width: 98vw;
-    max-height: 85vh;
-    padding: 10px 4px;
+  .envelope-wrapper {
+    width: 300px;
+    height: 230px;
+    max-width: 85vw;
+    max-height: 65vh;
+  }
+
+  .envelope-wrapper::before {
+    width: 300px;
+    height: 230px;
+  }
+
+  .envelope-wrapper > .envelope {
+    width: 300px;
+    height: 230px;
+  }
+
+  .envelope-wrapper > .envelope::before {
+    border-top: 130px solid var(--envelope-tab);
+    border-right: 150px solid transparent;
+    border-left: 150px solid transparent;
+  }
+
+  .envelope-wrapper > .envelope::after {
+    border-top: 130px solid transparent;
+    border-right: 150px solid var(--envelope-cover);
+    border-bottom: 100px solid var(--envelope-cover);
+    border-left: 150px solid var(--envelope-cover);
+  }
+
+  .envelope > .letter {
+    width: 54%;
+    height: 80%;
+    padding: 12px 6px;
+  }
+
+  .flap > .envelope > .letter {
+    bottom: 100px;
+    transform: scale(1.2);
   }
 
   .text {
-    font-size: 10px !important;
+    font-size: 9px !important;
     padding: 6px;
     line-height: 1.3;
   }
 
   .text strong {
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
 
   .text p {
     margin: 3px 0;
   }
 
+  /* Smaller pictures for very small screens */
   .floating-picture {
     width: 40px !important;
     height: 40px !important;
@@ -490,6 +494,103 @@ body{
     height: 50px !important;
   }
 
+  /* Smaller hearts for very small screens */
+  .floating-heart {
+    width: 15px;
+    height: 15px;
+  }
+
+  .floating-heart::before,
+  .floating-heart::after {
+    width: 15px;
+    height: 15px;
+  }
+
+  .floating-heart:before {
+    top: -7.5px;
+  }
+
+  .floating-heart:after {
+    right: 7.5px;
+  }
+}
+
+/* Extra small mobile screens */
+@media screen and (max-width: 360px) {
+  .container {
+    padding: 10px 3px;
+  }
+
+  .envelope-wrapper {
+    width: 250px;
+    height: 192px;
+    max-width: 80vw;
+    max-height: 60vh;
+  }
+
+  .envelope-wrapper::before {
+    width: 250px;
+    height: 192px;
+  }
+
+  .envelope-wrapper > .envelope {
+    width: 250px;
+    height: 192px;
+  }
+
+  .envelope-wrapper > .envelope::before {
+    border-top: 108px solid var(--envelope-tab);
+    border-right: 125px solid transparent;
+    border-left: 125px solid transparent;
+  }
+
+  .envelope-wrapper > .envelope::after {
+    border-top: 108px solid transparent;
+    border-right: 125px solid var(--envelope-cover);
+    border-bottom: 84px solid var(--envelope-cover);
+    border-left: 125px solid var(--envelope-cover);
+  }
+
+  .envelope > .letter {
+    width: 54%;
+    height: 80%;
+    padding: 10px 4px;
+  }
+
+  .flap > .envelope > .letter {
+    bottom: 84px;
+    transform: scale(1.1);
+  }
+
+  .text {
+    font-size: 8px !important;
+    padding: 4px;
+    line-height: 1.2;
+  }
+
+  .text strong {
+    font-size: 10px !important;
+  }
+
+  .text p {
+    margin: 2px 0;
+  }
+
+  .floating-picture {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .floating-picture.small {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .floating-picture.large {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
   .floating-heart {
     width: 12px;
     height: 12px;
@@ -499,5 +600,13 @@ body{
   .floating-heart::after {
     width: 12px;
     height: 12px;
+  }
+
+  .floating-heart:before {
+    top: -6px;
+  }
+
+  .floating-heart:after {
+    right: 6px;
   }
 }
