@@ -1,0 +1,416 @@
+:root{
+  --primary: #fdf2f8;
+  --bg-color: #fce7f3;
+  --bg-envelope-color: #fce7f3;
+  --envelope-tab: #fbcfe8;
+  --envelope-cover: #f9a8d4;
+  --shadow-color: rgba(236, 72, 153, 0.2);
+  --txt-color: #831843;
+  --heart-color: #be185d;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.container > .envelope-wrapper {
+  box-shadow: 0 0 40px var(--shadow-color);
+  border-radius: 15px;
+  overflow: visible;
+  position: relative;
+}
+.envelope-wrapper > .envelope {
+  position: relative;
+  width: 450px;
+  height: 345px;
+}
+
+.envelope-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 450px;
+  height: 345px;
+  background: var(--bg-envelope-color);
+  border-radius: 15px;
+  z-index: 0;
+}
+.envelope-wrapper > .envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  border-top: 195px solid var(--envelope-tab);
+  border-right: 225px solid transparent;
+  border-left: 225px solid transparent;
+  transform-origin: top;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.envelope-wrapper > .envelope::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 0px;
+  height: 0px;
+  border-top: 195px solid transparent;
+  border-right: 225px solid var(--envelope-cover);
+  border-bottom: 150px solid var(--envelope-cover);
+  border-left: 225px solid var(--envelope-cover);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.envelope > .letter {
+  position: absolute;
+  right: 20%;
+  bottom: 0;
+  width: 54%;
+  height: 80%;
+  background: var(--primary);
+  text-align: center;
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 5px var(--shadow-color);
+  padding: 20px 10px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.envelope > .letter > .text {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: var(--txt-color);
+  text-align: left;
+  font-size: 10px;
+}
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  background: var(--heart-color);
+  z-index: 4;
+  transform: translate(-50%, -30%) rotate(45deg);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 3px 12px var(--shadow-color);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.heart:hover {
+  transform: translate(-50%, -30%) rotate(45deg) scale(1.1);
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+.heart:before,
+.heart:after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: var(--heart-color);
+  border-radius: 50%;
+}
+.heart:before {
+  top: -12.5px;
+}
+.heart:after {
+  right: 12.5px;
+}
+.flap > .envelope:before {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+.flap > .envelope > .letter {
+  bottom: 150px;
+  transform: scale(1.5);
+  transition-delay: 0.8s;
+}
+.flap > .heart {
+  transform: translate(-50%, -30%) rotate(90deg) scale(1.1);
+  transition-delay: 0.2s;
+}
+
+/* Floating hearts animation */
+.floating-heart {
+  position: fixed;
+  width: 15px;
+  height: 15px;
+  background: var(--heart-color);
+  transform: rotate(45deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 2px;
+}
+
+.floating-heart:before,
+.floating-heart:after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: var(--heart-color);
+  border-radius: 50%;
+}
+
+.floating-heart:before {
+  top: -7.5px;
+}
+
+.floating-heart:after {
+  right: 7.5px;
+}
+
+.floating-heart.animate {
+  animation: floatUp 3s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(45deg) scale(0.3);
+  }
+  25% {
+    opacity: 0.9;
+    transform: translateY(-80px) translateX(20px) rotate(45deg) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-160px) translateX(-10px) rotate(45deg) scale(1.1);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translateY(-240px) translateX(30px) rotate(45deg) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-320px) translateX(-20px) rotate(45deg) scale(0.2);
+  }
+}
+
+/* Hidden pictures inside envelope */
+.hidden-pictures {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.envelope-picture {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  transform: scale(0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+}
+
+/* Floating picture animations */
+.floating-picture {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 3px solid white;
+  transform: scale(0.1);
+}
+
+.floating-picture.small {
+  width: 60px;
+  height: 60px;
+}
+
+.floating-picture.large {
+  width: 100px;
+  height: 100px;
+}
+
+.floating-picture.animate {
+  animation: pictureFloat 3s ease-out forwards;
+}
+
+.floating-picture.orbit {
+  animation: orbitAroundEnvelope 8s ease-in-out infinite;
+}
+
+@keyframes pictureFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.1);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-60px) translateX(20px) rotate(10deg) scale(0.9);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-120px) translateX(-30px) rotate(-5deg) scale(1);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-180px) translateX(40px) rotate(15deg) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-220px) translateX(-20px) rotate(-8deg) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-250px) translateX(10px) rotate(5deg) scale(1);
+  }
+}
+
+@keyframes orbitAroundEnvelope {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) translateX(15px) rotate(5deg) scale(1.02);
+  }
+  50% {
+    transform: translateY(0px) translateX(0px) rotate(-3deg) scale(1);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-15px) rotate(8deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+  }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 20px 10px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .envelope-wrapper {
+    transform: scale(0.7);
+    transform-origin: center;
+  }
+
+  .envelope {
+    max-width: 90vw;
+  }
+
+  .letter {
+    max-width: 85vw;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 15px;
+  }
+
+  .text strong {
+    font-size: 16px;
+  }
+
+  .text p {
+    margin: 8px 0;
+  }
+
+  /* Adjust floating pictures for mobile */
+  .floating-picture {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .floating-picture.small {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .floating-picture.large {
+    width: 75px !important;
+    height: 75px !important;
+  }
+
+  /* Adjust floating hearts for mobile */
+  .floating-heart {
+    width: 20px;
+    height: 20px;
+  }
+
+  .floating-heart::before,
+  .floating-heart::after {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .envelope-wrapper {
+    transform: scale(0.6);
+  }
+
+  .text {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .text strong {
+    font-size: 14px;
+  }
+
+  /* Smaller pictures for very small screens */
+  .floating-picture {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .floating-picture.small {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .floating-picture.large {
+    width: 65px !important;
+    height: 65px !important;
+  }
+
+  /* Smaller hearts for very small screens */
+  .floating-heart {
+    width: 16px;
+    height: 16px;
+  }
+
+  .floating-heart::before,
+  .floating-heart::after {
+    width: 16px;
+    height: 16px;
+  }
+}
